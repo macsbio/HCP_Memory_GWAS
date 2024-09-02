@@ -1,4 +1,4 @@
-This GitHub contains all the code used in the study "Beyond single variants: A pathway-based approach to explore the genetic basis of memory" 2024.
+This repository contains all the code used in the study "Beyond single variants: A pathway-based approach to explore the genetic basis of memory" 2024.
 
 Content:
     File 1      Contains the code needed to remove duplicate loci that are present on both chips from the Human
