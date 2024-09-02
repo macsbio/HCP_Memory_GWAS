@@ -1,1 +1,0 @@
-# HCP_Memory_GWAS
