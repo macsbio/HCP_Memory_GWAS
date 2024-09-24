@@ -1,4 +1,4 @@
-# Beyond single variants: A pathway-based approach to explore the genetic basis of memory
+## Beyond single variants: A pathway-based approach to explore the genetic basis of memory
 
 This repository contains all the code used to analyze the GWAS data of the human connectome project to study genetic variants related to memory performance. 
 The publication is currently under review.
