@@ -8,9 +8,9 @@ library(dplyr)
 DATA.DIR <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(DATA.DIR)
 
-iwrd <- read.table("FUMA_input_iwrd.txt", header = T, sep = "\t")
-pics <- read.table("FUMA_input_pics.txt.txt", header = T, sep = "\t")
-list <- read.table("FUMA_input_list.txt.txt", header = T, sep = "\t")
+iwrd <- read.table("iwrd_imputed_results.txt", header = T, sep = "\t")
+pics <- read.table("pics_imputed_results.txt", header = T, sep = "\t")
+list <- read.table("list_imputed_results.txt", header = T, sep = "\t")
 
 iwrd$Analysis <- "Penn-Word (EM)"
 pics$Analysis <- "Picture-Sequence (EM)"
