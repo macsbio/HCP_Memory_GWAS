@@ -17,42 +17,42 @@ pics$Analysis <- "Picture-Sequence (EM)"
 list$Analysis <- "List-Sorting (WM)"
 
 input <- pics
-input <- input[order(input$CHR),]
+input <- input[order(input$chr),]
 
 # Create cumulative positions for ordering x-axis
 input$BPcum <- NA
 input$BPcum <- as.numeric(input$BPcum)
 s <- 0
 nbp <- c()
-chrnum <- unique(input$CHR)
+chrnum <- unique(input$chr)
 for (i in 1:length(chrnum)) {
-  nbp[i] <- max(input[input$CHR == chrnum[i],]$POS)
-  input[input$CHR == chrnum[i],"BPcum"] <- input[input$CHR == chrnum[i],"POS"] + s
+  nbp[i] <- max(input[input$chr == chrnum[i],]$bp)
+  input[input$chr == chrnum[i],"BPcum"] <- input[input$chr == chrnum[i],"bp"] + s
   s <- s + nbp[i]
 }
 
 #Create centering for each chromosome x-axis location
 axis.set <- input %>%
-  group_by(CHR) %>%
+  group_by(chr) %>%
   summarise(center = (max(BPcum) + min(BPcum)) / 2)
-ylim <- (-log10(min(input$P)) + 1)
+ylim <- (-log10(min(input$p)) + 1)
 sig = 5E-8
 
-axis.set$CHR[axis.set$CHR==26] <- "MT"
-axis.set$CHR[axis.set$CHR==23] <- "XY"
+axis.set$chr[axis.set$chr==26] <- "MT"
+axis.set$chr[axis.set$chr==23] <- "XY"
 
-input$CHR[input$CHR==26] <- "MT"
-input$CHR[input$CHR==23] <- "XY"
+input$chr[input$chr==26] <- "MT"
+input$chr[input$chr==23] <- "XY"
 
-input$CHR <- factor(input$CHR, levels = c(unique(input$CHR)))
+input$CHR <- factor(input$CHR, levels = c(unique(input$chr)))
 
 # ggplot
-manhattanplot <- ggplot(input, aes(x = BPcum, y = -log10(P), 
-                                   colour = CHR)) +
+manhattanplot <- ggplot(input, aes(x = BPcum, y = -log10(p), 
+                                   colour = chr)) +
   geom_point(size = 1) +
-  geom_point(data = input, aes(x = BPcum, y = -log10(P)), size = 1) +
+  geom_point(data = input, aes(x = BPcum, y = -log10(p)), size = 1) +
   scale_x_continuous(expand = c(0.05,0.05), 
-                     breaks = axis.set$center, labels = axis.set$CHR,
+                     breaks = axis.set$center, labels = axis.set$chr,
                      guide = guide_axis(check.overlap = TRUE, n.dodge = 2)) +
   scale_color_manual(values = rep(c("#276EBF", "#183059"), 24)) + 
   geom_point(data = input[input$P<1e-5,], color="#ff9933", size = 1) +
@@ -78,7 +78,7 @@ input <- list
 ci <- 0.95
 nSNPs <- nrow(input)
 plotdata <- data.frame(
-  observed = -log10(sort(input$P)),
+  observed = -log10(sort(input$p)),
   expected = -log10(ppoints(nSNPs)),
   clower   = -log10(qbeta(p = (1 - ci) / 2, shape1 = seq(nSNPs), shape2 = rev(seq(nSNPs)))),
   cupper   = -log10(qbeta(p = (1 + ci) / 2, shape1 = seq(nSNPs), shape2 = rev(seq(nSNPs))))
