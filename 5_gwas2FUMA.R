@@ -1,33 +1,26 @@
-iwrd <- read.table("geno_assoc_iwrd_residuals.fastGWA", header = T, sep = "\t")
+iwrd <- read.table("iwrd.loco.mlma", header = T, sep = "\t")
 iwrd <- na.omit(iwrd)
-iwrd$POS <- as.integer(iwrd$POS)
-iwrd$CHR <- as.integer(iwrd$CHR)
-iwrd$N <- as.integer(iwrd$N)
-iwrd <- iwrd[iwrd$AF1>=0.05 & iwrd$AF1<=0.95,]
-iwrd$CHR[iwrd$CHR==24] <- 23
-iwrd$CHR[iwrd$CHR==25] <- 23
-write.table(iwrd, "FUMA_input_iwrd.txt", col.names = T,
+iwrd <- iwrd[,c(1:5,7:9)]
+colnames(iwrd) <- c("chr","rsid","bp","a1","a2","b","se","p")
+iwrd$pos <- as.integer(iwrd$bp)
+iwrd$chr <- as.integer(iwrd$chr)
+write.table(iwrd, "iwrd_imputed_results.txt", col.names = T,
             sep = "\t", quote= F, row.names = F)
 
-pics <- read.table("geno_assoc_pics_residuals.fastGWA", header = T, sep = "\t")
+pics <- read.table("pics.loco.mlma", header = T, sep = "\t")
 pics <- na.omit(pics)
-pics$POS <- as.integer(pics$POS)
-pics$CHR <- as.integer(pics$CHR)
-pics$N <- as.integer(pics$N)
-pics <- pics[pics$AF1>=0.05 & pics$AF1<=0.95,]
-pics$CHR[pics$CHR==24] <- 23
-pics$CHR[pics$CHR==25] <- 23
-write.table(pics, "FUMA_input_pics.txt", col.names = T,
+pics <- pics[,c(1:5,7:9)]
+colnames(pics) <- c("chr","rsid","bp","a1","a2","b","se","p")
+pics$pos <- as.integer(pics$bp)
+pics$chr <- as.integer(pics$chr)
+write.table(pics, "pics_imputed_results.txt", col.names = T,
             sep = "\t", quote= F, row.names = F)
 
-list <- read.table("geno_assoc_list_residuals.fastGWA", header = T, sep = "\t")
+list <- read.table("list.loco.mlma", header = T, sep = "\t")
 list <- na.omit(list)
-list$POS <- as.integer(list$POS)
-list$CHR <- as.integer(list$CHR)
-list$N <- as.integer(list$N)
-list <- list[list$AF1>=0.05 & list$AF1<=0.95,]
-list$CHR[list$CHR==24] <- 23
-list$CHR[list$CHR==25] <- 23
-write.table(list, "FUMA_input_list.txt", col.names = T,
+list <- list[,c(1:5,7:9)]
+colnames(list) <- c("chr","rsid","bp","a1","a2","b","se","p")
+list$pos <- as.integer(list$bp)
+list$chr <- as.integer(list$chr)
+write.table(list, "list_imputed_results.txt", col.names = T,
             sep = "\t", quote= F, row.names = F)
-
