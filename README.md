@@ -11,3 +11,4 @@ Content:
 * ```5_gwas2FUMA.R```: Getting the output from GCTA into a format readable by FUMA
 * ```5a_qq_manhattan.R```: For plotting Manhattan and QQ plots.
 * ```6_FUMA2Networks.R```: Taking the FUMA output, filtering it, and visualizing it in Cytoscape networks
+* ```7_pathway_permutation.R```: See what the expected pathway overlap is based on gene list sizes
